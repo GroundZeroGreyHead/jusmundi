@@ -37,6 +37,8 @@ func (t tensState) convert(n int) string {
 	isDivisibleByTen := n % 10
 	if isDivisibleByTen == 0 {
 		return tens[d]
+	} else if isDivisibleByTen == 1 {
+		return fmt.Sprintf("%s-et-%s", tens[d], units(n%10))
 	}
 	return fmt.Sprintf("%s-%s", tens[d], units(n%10))
 }
@@ -129,7 +131,7 @@ func convert(n int) string {
 }
 
 func main() {
-	input := []int{0, 1, 5, 10, 11, 15, 20, 21, 30, 35, 50, 51, 68, 70, 75, 99, 100, 101, 105, 111, 123, 168, 171, 175, 199, 200, 201, 555, 999, 1000, 1001, 1111, 1199, 1234, 1999, 2000, 2001, 2020, 2021, 2345, 9999, 10000, 11111, 12345, 123456, 654321, 999999}
+	input := []int{0, 1, 5, 10, 11, 15, 20, 21, 30, 31, 35, 50, 51, 61, 68, 70, 71, 75, 80, 81, 91, 99, 100, 101, 105, 111, 123, 168, 171, 175, 199, 200, 201, 555, 999, 1000, 1001, 1111, 1199, 1234, 1999, 2000, 2001, 2020, 2021, 2345, 9999, 10000, 11111, 12345, 123456, 654321, 999999}
 	output := make([]string, len(input))
 	for i, num := range input {
 		output[i] = convert(num)

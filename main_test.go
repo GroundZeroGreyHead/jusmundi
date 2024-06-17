@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -35,18 +34,6 @@ var seedNumbers = map[int]string{
 	100: "cent",
 }
 
-func convertTestSeed(n int) string {
-	tensDigit := n / 10
-	if result, ok := seedNumbers[tensDigit*10]; ok {
-		unitsDigit := n % 10
-		if unitsDigit > 0 {
-			return fmt.Sprintf("%s-%s", result, units(unitsDigit))
-		}
-		return result
-	}
-	return ""
-}
-
 func TestConvertZero(t *testing.T) {
 	expected := "zéro"
 	actual := convert(0)
@@ -74,8 +61,62 @@ func TestConvertSingleDigit(t *testing.T) {
 }
 
 func TestConvertTens(t *testing.T) {
+	numToFrench := map[int]string{
+		20: "vingt",
+		21: "vingt-et-un",
+		22: "vingt-deux",
+		23: "vingt-trois",
+		24: "vingt-quatre",
+		25: "vingt-cinq",
+		26: "vingt-six",
+		27: "vingt-sept",
+		28: "vingt-huit",
+		29: "vingt-neuf",
+		30: "trente",
+		31: "trente-et-un",
+		32: "trente-deux",
+		33: "trente-trois",
+		34: "trente-quatre",
+		35: "trente-cinq",
+		36: "trente-six",
+		37: "trente-sept",
+		38: "trente-huit",
+		39: "trente-neuf",
+		40: "quarante",
+		41: "quarante-et-un",
+		42: "quarante-deux",
+		43: "quarante-trois",
+		44: "quarante-quatre",
+		45: "quarante-cinq",
+		46: "quarante-six",
+		47: "quarante-sept",
+		48: "quarante-huit",
+		49: "quarante-neuf",
+		50: "cinquante",
+		51: "cinquante-et-un",
+		52: "cinquante-deux",
+		53: "cinquante-trois",
+		54: "cinquante-quatre",
+		55: "cinquante-cinq",
+		56: "cinquante-six",
+		57: "cinquante-sept",
+		58: "cinquante-huit",
+		59: "cinquante-neuf",
+		60: "soixante",
+		61: "soixante-et-un",
+		62: "soixante-deux",
+		63: "soixante-trois",
+		64: "soixante-quatre",
+		65: "soixante-cinq",
+		66: "soixante-six",
+		67: "soixante-sept",
+		68: "soixante-huit",
+		69: "soixante-neuf",
+		70: "soixante-dix",
+	}
+
 	for i := 20; i < 70; i++ {
-		expected := convertTestSeed(i)
+		expected := numToFrench[i]
 		actual := convert(i)
 		if actual != expected {
 			t.Errorf("convert(%d) expected %s, got %s", i, expected, actual)
